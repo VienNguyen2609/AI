@@ -26,7 +26,6 @@ def id3(X, y, attributes):
     gains = {attr: information_gain(X, y, attr) for attr in attributes}
     best_attr = max(gains, key=gains.get)
 
-    # Tạo node cho attr tốt nhất
     tree = {best_attr: {}}
     for value in set(x[best_attr] for x in X):
         subset_X = [x for x in X if x[best_attr] == value]
@@ -34,24 +33,30 @@ def id3(X, y, attributes):
         remaining_attrs = [a for a in attributes if a != best_attr]
         tree[best_attr][value] = id3(subset_X, subset_y, remaining_attrs)
     return tree
-
 X = [
-    {"Outlook": "Sunny", "Temperature": 85, "Humidity": 85, "Wind": "Weak"},
-    {"Outlook": "Sunny", "Temperature": 80, "Humidity": 90, "Wind": "Strong"},
-    {"Outlook": "Overcast", "Temperature": 83, "Humidity": 78, "Wind": "Weak"},
-    {"Outlook": "Rain", "Temperature": 70, "Humidity": 96, "Wind": "Weak"},
-    {"Outlook": "Rain", "Temperature": 68, "Humidity": 80, "Wind": "Weak"},
-    {"Outlook": "Rain", "Temperature": 65, "Humidity": 70, "Wind": "Strong"},
-    {"Outlook": "Overcast", "Temperature": 64, "Humidity": 65, "Wind": "Strong"},
-    {"Outlook": "Sunny", "Temperature": 72, "Humidity": 95, "Wind": "Weak"},
-    {"Outlook": "Sunny", "Temperature": 69, "Humidity": 70, "Wind": "Weak"},
-    {"Outlook": "Rain", "Temperature": 75, "Humidity": 80, "Wind": "Weak"},
-    {"Outlook": "Sunny", "Temperature": 75, "Humidity": 70, "Wind": "Strong"},
-    {"Outlook": "Overcast", "Temperature": 72, "Humidity": 90, "Wind": "Strong"},
-    {"Outlook": "Overcast", "Temperature": 81, "Humidity": 75, "Wind": "Weak"},
-    {"Outlook": "Rain", "Temperature": 71, "Humidity": 91, "Wind": "Strong"}
+    {"Age": "Young", "Income": "High", "Student": "No", "Credit": "Fair"},
+    {"Age": "Young", "Income": "High", "Student": "No", "Credit": "Excellent"},
+    {"Age": "Medium", "Income": "High", "Student": "No", "Credit": "Fair"},
+    {"Age": "Old", "Income": "Medium", "Student": "No", "Credit": "Fair"},
+    {"Age": "Old", "Income": "Low", "Student": "Yes", "Credit": "Fair"},
+    {"Age": "Old", "Income": "Low", "Student": "Yes", "Credit": "Excellent"},
+    {"Age": "Medium", "Income": "Low", "Student": "Yes", "Credit": "Excellent"},
+    {"Age": "Young", "Income": "Medium", "Student": "No", "Credit": "Fair"},
+    {"Age": "Young", "Income": "Low", "Student": "Yes", "Credit": "Fair"},
+    {"Age": "Old", "Income": "Medium", "Student": "Yes", "Credit": "Fair"},
+    {"Age": "Young", "Income": "Medium", "Student": "Yes", "Credit": "Excellent"},
+    {"Age": "Medium", "Income": "Medium", "Student": "No", "Credit": "Excellent"},
+    {"Age": "Medium", "Income": "High", "Student": "Yes", "Credit": "Fair"},
+    {"Age": "Old", "Income": "Medium", "Student": "No", "Credit": "Excellent"}
 ]
-y = ["No","No","Yes","Yes","Yes","No","Yes","No","Yes","Yes","Yes","Yes","Yes","No"]
+y = ["No","No","Yes","Yes","Yes","No","Yes","No","Yes","Yes","Yes","No","Yes","No"]
+
+# -----------------------
+# 5. HUẤN LUYỆN & IN CÂY
+# -----------------------
+attributes = list(X[0].keys())
+tree = id3(X, y, attributes)
+print(tree)
 # -----------------------
 # 5. HUẤN LUYỆN & IN CÂY
 # -----------------------
