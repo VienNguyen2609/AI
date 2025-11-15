@@ -61,30 +61,30 @@ def predict_perceptron(X, w, b):
     return (scores >= 0).astype(int), scores
 
 if __name__ == "__main__":
-    # X_manual = np.array([[1,1],[8,3],[2,7],[8,8],[9,9]], dtype=float)
-    # y_manual = np.array([0,0,1,1,1], dtype=int)
-    #
-    # print("Bắt đầu huấn luyện Perceptron với dữ liệu thủ công...")
-    # w, b, epochs_used, converged = train_perceptron(X_manual, y_manual, max_epochs=1000, verbose=True)
-    # print("\nTrọng số học được:", w)
-    # print("Bias học được:", b)
-    # print("Epoch đã dùng:", epochs_used, "Hội tụ:", converged)
-    #
-    # # Dự đoán cho điểm test (mặc định theo đề: x1=9, x2=2)
-    # test_point = np.array([9.0, 2.0])
-    # pred, score = predict_perceptron(test_point, w, b)
-    # label_str = "Chín" if pred[0] == 1 else "Xanh"
-    # print(f"\nDự đoán cho điểm {test_point.tolist()} -> score={score[0]:.4f}, nhãn={pred[0]} ({label_str})")
-    #
-    # # In kết quả trên toàn tập huấn luyện để kiểm tra
-    # preds_train, scores_train = predict_perceptron(X_manual, w, b)
-    # print("\nDự đoán trên tập huấn luyện:")
-    # for xi, yi, pi, sc in zip(X_manual, y_manual, preds_train, scores_train):
-    #     print(f" x={xi.tolist()}  y_true={yi}  -> score={sc:.4f}  pred={pi}")
+    X_manual = np.array([[1,1],[8,3],[2,7],[8,8],[9,9]], dtype=float)
+    y_manual = np.array([0,0,1,1,1], dtype=int)
+
+    print("Bắt đầu huấn luyện Perceptron với dữ liệu thủ công...")
+    w, b, epochs_used, converged = train_perceptron(X_manual, y_manual, max_epochs=1000, verbose=True)
+    print("\nTrọng số học được:", w)
+    print("Bias học được:", b)
+    print("Epoch đã dùng:", epochs_used, "Hội tụ:", converged)
+
+    # Dự đoán cho điểm test (mặc định theo đề: x1=9, x2=2)
+    test_point = np.array([9.0, 2.0])
+    pred, score = predict_perceptron(test_point, w, b)
+    label_str = "Chín" if pred[0] == 1 else "Xanh"
+    print(f"\nDự đoán cho điểm {test_point.tolist()} -> score={score[0]:.4f}, nhãn={pred[0]} ({label_str})")
+
+    # In kết quả trên toàn tập huấn luyện để kiểm tra
+    preds_train, scores_train = predict_perceptron(X_manual, w, b)
+    print("\nDự đoán trên tập huấn luyện:")
+    for xi, yi, pi, sc in zip(X_manual, y_manual, preds_train, scores_train):
+        print(f" x={xi.tolist()}  y_true={yi}  -> score={sc:.4f}  pred={pi}")
 
     #--- Cách B: đọc dữ liệu từ CSV (bỏ comment nếu muốn dùng) ---
     #Ví dụ file CSV có header, cột cuối là label 0/1
-    path_csv = r"E:\Python\AI\Book1.csv"
-    X_csv, y_csv = load_csv(path_csv)
-    w2, b2, e2, conv2 = train_perceptron(X_csv, y_csv, max_epochs=2000, verbose=True)
-    print("Trọng số từ CSV:", w2, "bias:", b2)
+    #path_csv = r"E:\Python\AI\Book1.csv"
+    # X_csv, y_csv = load_csv(path_csv)
+    # w2, b2, e2, conv2 = train_perceptron(X_csv, y_csv, max_epochs=2000, verbose=True)
+    # print("Trọng số từ CSV:", w2, "bias:", b2)
